@@ -22,8 +22,8 @@ export type Announcement = {
 // - Responsive typography and spacing
 
 const Hero: React.FC<HeroProps> = ({
-  title = "Smart Learning Solutions for Today's Students",
-  description = "Experience a modern coaching platform designed to strengthen fundamentals, improve performance, and boost exam results. With dedicated faculty and organised study plans, every student receives the guidance they need to succeed.",
+  title = "Personalized School Tuition for Class 1-10",
+  description = "Expert teachers, personalized learning, and proven results — helping every student learn smarter and score higher.",
   imageSrc = "/hero.png",
 }) => {
   const items = [
