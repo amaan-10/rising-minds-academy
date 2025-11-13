@@ -31,7 +31,7 @@ export default function Testimonials({
     },
     {
       quote:
-        "My daughter's confidence and academic performance have improved tremendously within just a few months of joining this academy. The small class sizes ensure that every child receives personal attention, and the regular feedback from teachers helps us stay involved in her progress. Highly recommend!",
+        "My daughter's confidence and academic performance have improved tremendously within just a few months of joining this academy. The small class sizes ensure that every child receives personal attention, and the regular feedback from teachers helps us stay involved in her progress.",
       name: "Sneha Patel",
       id: "Parent",
       imageSrc: "/images/testi-2.jpg",
@@ -39,7 +39,7 @@ export default function Testimonials({
     },
     {
       quote:
-        "The teachers at this academy are incredibly friendly, patient, and truly passionate about teaching. Their focus on building strong fundamentals has made a noticeable difference in my son's understanding and confidence. The personalized approach to learning ensures that each student's unique needs are met.",
+        "The teachers here are incredibly friendly, patient, and truly passionate about teaching. Their focus on strong fundamentals has made a noticeable difference in my son's understanding and confidence. The personalized learning approach ensures each student's unique needs are met.",
       name: "Amit Desai",
       id: "Parent",
       imageSrc: "/images/testi-3.jpg",
@@ -97,83 +97,88 @@ export default function Testimonials({
           <div className="flex-[1_0_0] w-px h-full relative">
             <article className="flex flex-col justify-center items-center gap-0 w-full h-min px-14 pt-10 pb-14 relative overflow-hidden bg-[#FAF7EF] opacity-100">
               <div className="border-b border-[rgba(59,59,59,0.12)] pb-6 mb-6">
-                <p className="text-gray-800 text-lg md:text-xl leading-relaxed">
+                <p className="text-gray-800 text-lg md:text-xl leading-relaxed font-medium">
                   “{t.quote}”
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 shrink-0">
-                  {t.imageSrc ? (
-                    <Image
-                      src={t.imageSrc}
-                      alt={t.imageAlt ?? t.name}
-                      width={64}
-                      height={64}
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-sm text-gray-600">
-                      No Image
-                    </div>
-                  )}
-                </div>
+              <div className="flex flex-row items-center justify-between w-full">
+                <div className="flex items-start gap-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 shrink-0">
+                    {t.imageSrc ? (
+                      <Image
+                        src={t.imageSrc}
+                        alt={t.imageAlt ?? t.name}
+                        width={64}
+                        height={64}
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-sm text-gray-600">
+                        No Image
+                      </div>
+                    )}
+                  </div>
 
-                <div>
-                  <p className="text-sm font-medium text-gray-900">{t.name}</p>
-                  {t.id && <p className="text-xs text-gray-600">{t.id}</p>}
+                  <div>
+                    <p className="text-base font-medium text-gray-900">
+                      {t.name}
+                    </p>
+                    {t.id && <p className="text-sm text-gray-600">{t.id}</p>}
+                  </div>
+                </div>
+                {/* Prev / Next buttons */}
+                <div className="flex flex-row items-center gap-5 justify-end">
+                  <div className=" flex items-center gap-2">
+                    <button
+                      onClick={prev}
+                      aria-label="Previous testimonial"
+                      className="w-9 h-9 rounded-full bg-black/25 flex items-center justify-center"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M15 6L9 12L15 18"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <div className=" flex items-center gap-2">
+                    <button
+                      onClick={next}
+                      aria-label="Next testimonial"
+                      className="w-9 h-9 rounded-full bg-black/25 flex items-center justify-center"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden
+                      >
+                        <path
+                          d="M9 6L15 12L9 18"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </article>
-
-            {/* Prev / Next buttons */}
-            <div className="absolute -translate-y-1/2 top-1/2 left-2 md:left-4 flex items-center gap-2">
-              <button
-                onClick={prev}
-                aria-label="Previous testimonial"
-                className="w-9 h-9 rounded-full bg-black/25 flex items-center justify-center"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M15 6L9 12L15 18"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            <div className="absolute -translate-y-1/2 top-1/2 right-2 md:right-4 flex items-center gap-2">
-              <button
-                onClick={next}
-                aria-label="Next testimonial"
-                className="w-9 h-9 rounded-full bg-black/25 flex items-center justify-center"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M9 6L15 12L9 18"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
 
             {/* Dots / pagination */}
             <div className="mt-6 flex items-center justify-center gap-3">
@@ -202,7 +207,7 @@ export default function Testimonials({
                 <div className="w-auto h-auto relative">
                   <div className="cursor-pointer flex flex-row items-center gap-2.5 w-full h-min p-0 relative overflow-hidden">
                     <a
-                      className="will-change-transform flex flex-row flex-none justify-center items-center gap-3.5 w-full h-min px-8 py-2.5 no-underline relative overflow-hidden bg-white rounded-sm"
+                      className="will-change-transform flex flex-row flex-none justify-center items-center gap-3.5 w-full h-min px-8 py-2.5 no-underline relative overflow-hidden bg-white"
                       href="./contact"
                     >
                       <div className="flex flex-row flex-none justify-center items-center gap-2.5 w-full h-min p-0 relative overflow-hidden">

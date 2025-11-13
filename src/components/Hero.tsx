@@ -81,10 +81,10 @@ const Hero: React.FC<HeroProps> = ({
         aria-label="Announcements"
         className="w-full bg-neutral-900 text-white"
       >
-        <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 py-8">
+        <div className="mx-auto px-12 py-8">
+          <div className="flex items-center gap-4">
             {/* Title */}
-            <h2 className="whitespace-nowrap text-sm sm:text-base font-extrabold tracking-wide">
+            <h2 className="whitespace-nowrap text-sm md:text-2xl font-bold tracking-wide">
               ANNOUNCEMENTS
             </h2>
 
@@ -117,7 +117,7 @@ const Hero: React.FC<HeroProps> = ({
                   }
                 `}</style>
 
-                <p className="min-w-0 truncate">
+                <p className="min-w-0 truncate text-lg font-medium">
                   {first.text}
                   {first.href ? (
                     <Link
