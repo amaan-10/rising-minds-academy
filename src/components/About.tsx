@@ -11,21 +11,21 @@ export default function About() {
       title: "Academic Excellence",
       description:
         "We nurture strong conceptual understanding and problem-solving skills through expert guidance and innovative teaching methods — helping every student achieve top academic performance from Class 1 to 10.",
-      imageSrc: "/images/feature-1.jpg",
+      imageSrc: "/placeholder.jpeg",
       imageAlt: "Students at Academy",
     },
     {
       title: "Holistic Development",
       description:
         "Beyond academics, we focus on building confidence, creativity, and communication skills. Our balanced approach ensures students grow intellectually, emotionally, and socially — preparing them for success in every field.",
-      imageSrc: "/images/feature-2.jpg",
+      imageSrc: "/placeholder.jpeg",
       imageAlt: "Students collaborating",
     },
     {
       title: "Personalized Learning Journey",
       description:
         "Every student learns differently. Our customized study plans, small batch sizes, and regular assessments ensure that each learner gets the attention, feedback, and motivation they need to excel.",
-      imageSrc: "/images/feature-3.jpg",
+      imageSrc: "/placeholder.jpeg",
       imageAlt: "Learning journey",
     },
   ];

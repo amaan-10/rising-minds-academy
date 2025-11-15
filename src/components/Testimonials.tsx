@@ -26,7 +26,7 @@ export default function Testimonials({
         "Choosing this academy for my child was one of the best decisions we've ever made. From day one, the teachers have been incredibly supportive, patient, and dedicated to each student's growth. The learning experience here is both fun and structured — my child actually looks forward to classes every day!",
       name: "Rohit Sharma",
       id: "Parent",
-      imageSrc: "/images/testi-1.jpg",
+      imageSrc: "/profile-placeholder.png",
       imageAlt: "Parent portrait",
     },
     {
@@ -34,7 +34,7 @@ export default function Testimonials({
         "My daughter's confidence and academic performance have improved tremendously within just a few months of joining this academy. The small class sizes ensure that every child receives personal attention, and the regular feedback from teachers helps us stay involved in her progress.",
       name: "Sneha Patel",
       id: "Parent",
-      imageSrc: "/images/testi-2.jpg",
+      imageSrc: "/profile-placeholder.png",
       imageAlt: "Parent portrait",
     },
     {
@@ -42,7 +42,7 @@ export default function Testimonials({
         "The teachers here are incredibly friendly, patient, and truly passionate about teaching. Their focus on strong fundamentals has made a noticeable difference in my son's understanding and confidence. The personalized learning approach ensures each student's unique needs are met.",
       name: "Amit Desai",
       id: "Parent",
-      imageSrc: "/images/testi-3.jpg",
+      imageSrc: "/profile-placeholder.png",
       imageAlt: "Parent portrait",
     },
   ],

@@ -22,7 +22,7 @@ export type Announcement = {
 // - Responsive typography and spacing
 
 const Hero: React.FC<HeroProps> = ({
-  title = "Personalized School Tuition for Class 1-10",
+  title = "Shaping Young Mind's for a Brighter Tomorrow!",
   description = "Expert teachers, personalized learning, and proven results — helping every student learn smarter and score higher.",
   imageSrc = "/hero.png",
 }) => {
@@ -31,7 +31,7 @@ const Hero: React.FC<HeroProps> = ({
       id: "a1",
       text: "Calls for admission for the academic year 2025-26 now online or ",
       href: "/",
-      linkText: "visit our campus",
+      linkText: "visit our academy",
     },
   ];
   const first = items[0];
@@ -48,6 +48,7 @@ const Hero: React.FC<HeroProps> = ({
             alt="CTA background"
             fill
             priority
+            quality={100}
             sizes="100vw"
             className="object-cover"
           />

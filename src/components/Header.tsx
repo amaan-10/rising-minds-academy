@@ -25,10 +25,51 @@ const NAV = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
-  { label: "Courses", href: "/courses" },
+  { label: "Academic", href: "/academic" },
   // { label: "News", href: "/news" },
   { label: "Contact Us", href: "/contact" },
 ];
+
+function Banner() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  if (!isOpen) return null; // hide banner completely
+
+  return (
+    <section id="banner" className="w-full bg-black">
+      <div className="relative flex items-center justify-center py-1">
+        {/* Text */}
+        <div className="relative h-8 overflow-hidden">
+          <div className="flex items-center gap-3 h-8">
+            <div className="h-6 shrink-0">
+              <div className="flex items-center gap-3 text-sm font-medium text-white">
+                <span className="w-full text-center">
+                  Admission Open AY-2025-26. CBSE BOARD 8 to 10th. SSC BOARD 1
+                  to 10th (ALL SUBJECTS)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Close Button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute right-8 h-3 w-3 text-white cursor-pointer"
+          aria-label="Close notification"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 384 512"
+            fill="white"
+          >
+            <path d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z" />
+          </svg>
+        </button>
+      </div>
+    </section>
+  );
+}
 
 const Header: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -36,8 +77,8 @@ const Header: React.FC = () => {
 
   return (
     <>
+      <Banner />
       <header className="bg-white">
-        {" "}
         {/* dark navy background */}
         <div className="px-8">
           <div className="flex items-center justify-between h-24">
@@ -80,7 +121,7 @@ const Header: React.FC = () => {
               {/* Desktop CTA */}
               <div className="hidden md:block relative w-auto h-auto">
                 <Link
-                  className="flex cursor-pointer flex-row justify-center items-center gap-2 h-min px-5 py-2.5 relative bg-[#efa027] no-underline"
+                  className="flex cursor-pointer flex-row justify-center items-center gap-2 h-min px-5 py-2.5 relative bg-[#efa027] no-underline group"
                   href="./contact-us"
                 >
                   <div className="flex flex-row justify-center items-center gap-0 h-min pt-[3px] relative overflow-visible">
@@ -90,15 +131,48 @@ const Header: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  <svg
-                    data-framer-name="Icon"
-                    className="flex items-center justify-center mt-1 w-5 h-5 relative opacity-100 transform-none text-white"
-                    role="presentation"
-                    viewBox="0 0 24 24"
-                    fill="white"
+                  <div
+                    className="flex items-center justify-center flex-row flex-nowrap gap-2.5 flex-none h-min w-min min-h-5 min-w-5 overflow-hidden mr-[3px] relative -rotate-90"
+                    style={{ opacity: 1 }}
                   >
-                    <path d="M7 7h8.586L5.293 17.293l1.414 1.414L17 8.414V17h2V5H7v2z" />
-                  </svg>
+                    <div className="absolute transition-all duration-300 ease-in-out group-hover:translate-x-[21px] group-hover:translate-y-[21px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="var(--token-21001bb2-95fc-4899-93cf-7cca6736a1a2, rgb(0, 0, 0))"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ width: "100%", height: "100%" }}
+                        className="stroke-white transition-colors duration-300"
+                      >
+                        <line x1="7" y1="7" x2="17" y2="17"></line>
+                        <polyline points="17 7 17 17 7 17"></polyline>
+                      </svg>
+                    </div>
+
+                    <div className="absolute top-[-21px] left-[-21px] w-5 h-5 transition-all duration-300 ease-in-out group-hover:translate-x-[21px] group-hover:translate-y-[21px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="var(--token-21001bb2-95fc-4899-93cf-7cca6736a1a2, rgb(0, 0, 0))"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ width: "100%", height: "100%" }}
+                        className=" stroke-white transition-colors duration-300"
+                      >
+                        <line x1="7" y1="7" x2="17" y2="17"></line>
+                        <polyline points="17 7 17 17 7 17"></polyline>
+                      </svg>
+                    </div>
+                  </div>
                 </Link>
               </div>
 
@@ -164,35 +238,13 @@ const Header: React.FC = () => {
           </div>
         </div>
       </header>
-      <section id="notice" className="w-full bg-[#faf7ef]">
-        <div className="mx-auto flex justify-between px-4 sm:px-6 lg:px-8 py-2.5">
-          {/* Heading */}
-          {/* <h2 className="w-full self-center text-sm font-semibold text-neutral-700">
-            <Link href="/" className="underline-offset-4 hover:underline">
-              Apply / Admitted? Let&apos;s make it official!
-            </Link>
-          </h2> */}
+      <section id="notice" className="w-full bg-[#ce4901]">
+        <div className="mx-auto flex justify-between py-1">
           {/* Ticker */}
           <div
             className="relative h-8 overflow-hidden"
-            style={{
-              WebkitMaskImage:
-                "linear-gradient(to right, rgba(0,0,0,0) 0%, rgb(0,0,0) 12.5%, rgb(0,0,0) 87.5%, rgba(0,0,0,0) 100%)",
-              maskImage:
-                "linear-gradient(to right, rgba(0,0,0,0) 0%, rgb(0,0,0) 12.5%, rgb(0,0,0) 87.5%, rgba(0,0,0,0) 100%)",
-            }}
             aria-label="Important notices"
           >
-            {/* gradient masks left/right */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-linear-to-r from-white to-transparent"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-linear-to-l from-white to-transparent"
-            />
-
             {/* Track */}
             <ul
               className="flex items-center gap-3 h-8 will-change-transform animate-marquee [animation-duration:30s] hover:[animation-play-state:paused]"
@@ -200,9 +252,9 @@ const Header: React.FC = () => {
             >
               {loop.map((item, idx) => (
                 <li key={`${item.id}-${idx}`} className="h-6 shrink-0">
-                  <div className="flex items-center gap-3 text-sm text-neutral-700">
+                  <div className="flex items-center gap-3 text-sm font-medium text-white">
                     <span
-                      className="h-1.5 w-1.5 flex items-center justify-center rounded-full bg-neutral-700"
+                      className="h-1.5 w-1.5 flex items-center justify-center rounded-full bg-white"
                       aria-hidden
                     />
                     {item.href ? (

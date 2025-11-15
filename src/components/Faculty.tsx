@@ -19,40 +19,40 @@ export default function Faculty({
   heading = "Meet Our Educators",
   academics = [
     {
-      name: "Dr. Wade Warren",
-      role: "Director, Center",
-      imageSrc: "/images/academic-1.jpg",
+      name: "Mrs. Samina Azhar Khan",
+      role: "M.A., M.Ed.",
+      imageSrc: "/profile-placeholder.png",
     },
     {
-      name: "Dr. Savannah Nguyen",
-      role: "Deputy Director, Center",
-      imageSrc: "/images/academic-2.jpg",
+      name: "Mr. Asif Sandu Shaikh",
+      role: "M.Sc., B.Ed.",
+      imageSrc: "/profile-placeholder.png",
     },
     {
-      name: "Dr. Kathryn Murphy",
-      role: "Principal Research Scientist",
-      imageSrc: "/images/academic-3.jpg",
+      name: "Mrs. Lubna Asif Shaikh",
+      role: "M.Sc., B.Ed.",
+      imageSrc: "/profile-placeholder.png",
     },
-    {
-      name: "Dr. Arlene McCoy",
-      role: "Research Associate Professor",
-      imageSrc: "/images/academic-4.jpg",
-    },
-    {
-      name: "Dr. Darrell Steward",
-      role: "Lead Research Analyst",
-      imageSrc: "/images/academic-5.jpg",
-    },
-    {
-      name: "Dr. Floyd Miles",
-      role: "Senior Scientist",
-      imageSrc: "/images/academic-6.jpg",
-    },
-    {
-      name: "Dr. Ralph Edwards",
-      role: "Research Project Coordinator",
-      imageSrc: "/images/academic-7.jpg",
-    },
+    // {
+    //   name: "Dr. Arlene McCoy",
+    //   role: "Research Associate Professor",
+    //   imageSrc: "/images/academic-4.jpg",
+    // },
+    // {
+    //   name: "Dr. Darrell Steward",
+    //   role: "Lead Research Analyst",
+    //   imageSrc: "/images/academic-5.jpg",
+    // },
+    // {
+    //   name: "Dr. Floyd Miles",
+    //   role: "Senior Scientist",
+    //   imageSrc: "/images/academic-6.jpg",
+    // },
+    // {
+    //   name: "Dr. Ralph Edwards",
+    //   role: "Research Project Coordinator",
+    //   imageSrc: "/images/academic-7.jpg",
+    // },
   ],
 }: Props) {
   return (

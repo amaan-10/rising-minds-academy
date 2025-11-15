@@ -1,5 +1,7 @@
+"use client"
 import React from "react";
 import MapSection from "./MapSection";
+import { useState } from "react";
 
 type Requirement = {
   id: string;
@@ -25,7 +27,7 @@ const REQUIREMENTS: Requirement[] = [
   },
   {
     id: "r5",
-    text: "Passport-size photographs of the student (2–4 copies)",
+    text: "Passport-size photographs of the student (2-4 copies)",
   },
   {
     id: "r6",
@@ -46,6 +48,10 @@ const REQUIREMENTS: Requirement[] = [
 ];
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
   return (
     <div>
       <section
@@ -76,11 +82,58 @@ const Contact = () => {
       <section className="flex flex-col flex-none justify-center items-center gap-0 h-min overflow-hidden py-20 px-[30px] pb-[70px] relative w-full">
         <div className="flex flex-col flex-none justify-center items-center gap-14 h-min max-w-[1320px] overflow-hidden p-0 relative w-full z-0">
           <div className="flex flex-row flex-none justify-start items-start gap-16 h-min overflow-visible p-0 relative w-full">
-            <div className="flex flex-row flex-[1_0_0px] justify-start items-start gap-[60px] h-min overflow-visible p-0 relative w-px">
-              <div className="outline-none flex flex-col justify-center shrink-0 flex-[1_0_0px] h-auto max-w-[569px] relative whitespace-pre-wrap w-px wrap-break-word">
+            <div className="flex flex-col flex-[1_0_0px] self-stretch overflow-visible p-0 relative">
+              <div className="outline-none flex flex-col gap-5 justify-start shrink-0 flex-[1_0_0px] h-auto max-w-[569px] relative whitespace-pre-wrap wrap-break-word">
                 <h2 className=" text-[#12161a] text-5xl font-medium">
                   Send us a Message
                 </h2>
+                <p className="text-base text-[#3b3b3b]">
+                  Fill out the form and we&apos;ll get back to you within 24hrs
+                </p>
+              </div>
+              <div className="flex flex-row flex-none items-start justify-between h-min overflow-clip mb-7 relative w-full">
+                <div className="flex flex-col justify-start items-start flex-1 gap-2.5 h-min overflow-clip p-0 relative w-px">
+                  <div className="flex flex-row justify-start items-start flex-none gap-2.5 h-min overflow-clip p-0 relative w-full">
+                    <div className="relative flex self-center justify-center h-full">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        className="h-5 w-5"
+                      >
+                        <path d="M160.2 25C152.3 6.1 131.7-3.9 112.1 1.4l-5.5 1.5c-64.6 17.6-119.8 80.2-103.7 156.4 37.1 175 174.8 312.7 349.8 349.8 76.3 16.2 138.8-39.1 156.4-103.7l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2C233.9 335.4 177.3 277 144.8 205.3L189 169.3c13.9-11.3 18.6-30.4 11.8-47L160.2 25z" />
+                      </svg>
+                    </div>
+                    <div className="flex-none h-auto relative whitespace-pre w-auto">
+                      <h5 className="text-xl font-medium text-black">
+                        Call Us
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="flex-none h-auto relative whitespace-pre-wrap w-full wrap-break-word">
+                    <p className="text-base text-[#787878]">+91 9876543210</p>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-start items-start flex-1 gap-2.5 h-min overflow-clip p-0 relative w-px">
+                  <div className="flex flex-row justify-start items-start flex-none gap-2.5 h-min overflow-clip p-0 relative w-full">
+                    <div className="relative flex self-center justify-center h-full">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        className="h-5 w-5"
+                      >
+                        <path d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z" />
+                      </svg>
+                    </div>
+                    <div className="flex-none h-auto relative whitespace-pre w-auto">
+                      <h5 className="text-xl font-medium text-black">Email</h5>
+                    </div>
+                  </div>
+                  <div className="flex-none h-auto relative whitespace-pre-wrap w-full wrap-break-word">
+                    <p className="text-base text-[#787878]">
+                      contact@risingmindsacademy.com
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <form className="flex flex-col flex-[1_0_0px] justify-start items-start gap-5 h-min max-w-[580px] overflow-visible p-0 relative w-px">
@@ -94,7 +147,8 @@ const Contact = () => {
                     name="Your Name"
                     placeholder="Your first name"
                     className="p-[12px_18px_12px_18px] w-full"
-                    value=""
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
@@ -110,31 +164,28 @@ const Contact = () => {
                     name="Email"
                     placeholder="email@mail.com"
                     className="p-[12px_18px_12px_18px] w-full"
-                    value=""
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </label>
               <label className="flex flex-col justify-start items-start flex-none gap-2.5 h-min p-0 relative w-full">
                 <div className="outline-none flex flex-col justify-start flex-none h-auto relative whitespace-pre w-auto">
-                  <p className="text-[#12161a] text-base">Select Dept </p>
+                  <p className="text-[#12161a] text-base">Select Class</p>
                 </div>
                 <div className="relative w-full h-auto border border-[#3b3b3b1f] rounded-lg">
                   <select
-                    name="Select Dep"
+                    name="Select Class"
                     className="p-[12px_18px_12px_18px] w-full"
                     defaultValue="0"
                   >
                     <option value="0" disabled className="text-[#0006]">
-                      Add a subject
+                      Choose an option
                     </option>
-                    <option value="1">
-                      Bachelor of Business Administration
-                    </option>
-                    <option value="2">Master of Business Administration</option>
-                    <option value="3">Computer Science and Engineering</option>
-                    <option value="4">
-                      Data Science and Artificial Intelligence
-                    </option>
+                    <option value="1">1st to 4th</option>
+                    <option value="2">5th to 8th</option>
+                    <option value="3">9th</option>
+                    <option value="4">10th</option>
                   </select>
                 </div>
               </label>
@@ -148,13 +199,15 @@ const Contact = () => {
                     name="Message"
                     placeholder="Write your message"
                     className="p-[12px_18px_12px_18px] w-full"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                   ></textarea>
                 </div>
               </label>
               <div className="relative w-auto h-auto">
                 <button
                   type="submit"
-                  className="flex items-center justify-center cursor-pointer flex-row gap-0 h-min overflow-visible px-8 py-3.5 relative w-min bg-[#cf102d] rounded opacity-100"
+                  className="flex items-center justify-center cursor-pointer flex-row gap-0 h-min overflow-visible px-8 py-3.5 relative w-min bg-[#efa027] rounded opacity-100"
                 >
                   <div className="outline-none flex flex-col justify-start flex-none h-auto relative select-none whitespace-pre w-auto">
                     <p className="text-white text-base font-medium">
@@ -205,12 +258,6 @@ const Contact = () => {
               Need help with your application or have questions about required
               documents? Reach out to our admissions team.
             </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-md bg-[#cf102d] px-5 py-2.5 text-base font-medium text-white shadow-sm hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#cf102d]/40"
-            >
-              Contact Admissions
-            </a>
           </div>
         </div>
       </section>
