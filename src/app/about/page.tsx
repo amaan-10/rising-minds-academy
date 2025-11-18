@@ -1,3 +1,4 @@
+"use client";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -7,7 +8,7 @@ const AboutPage = () => {
   return (
     <div>
       <Header />
-      <About />
+      <About isAbout={true} />
       <Footer />
     </div>
   );
