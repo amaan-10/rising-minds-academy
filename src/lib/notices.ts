@@ -66,7 +66,7 @@ export const Notices: NoticeItem[] = [
     "slug": "holiday-independence-day",
     "date": "August 10, 2025",
     "shortDescription": "The academy will remain closed on 15 August in observance of Independence Day. Regular academic sessions will resume from the next day.",
-    "overview": "Students and parents are informed that the academy will be closed on 15 August 2025 to mark the celebration of India’s Independence Day. On 14 August, a short cultural program will be held at the academy, featuring speeches, performances, and patriotic activities by students. All participating students are expected to attend the rehearsal session as communicated by their teachers. Classes will resume as usual on 16 August 2025. We encourage everyone to participate and celebrate this significant national event.",
+    "overview": "Students and parents are informed that the academy will be closed on 15 August 2025 to mark the celebration of India's Independence Day. On 14 August, a short cultural program will be held at the academy, featuring speeches, performances, and patriotic activities by students. All participating students are expected to attend the rehearsal session as communicated by their teachers. Classes will resume as usual on 16 August 2025. We encourage everyone to participate and celebrate this significant national event.",
     "keyDetails": [
       "Holiday Date: 15 August 2025",
       "Classes resume on 16 August",
@@ -79,3 +79,11 @@ export const Notices: NoticeItem[] = [
     ]
   }
 ]
+
+export function getNoticesBySlug(slug: string) {
+  return Notices.find((a) => a.slug === slug) ?? null;
+}
+
+export function getAllNoticesSlugs() {
+  return Notices.map((a) => a.slug);
+}
