@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
+import { motion, easeInOut } from "framer-motion";
+import Link from "next/link";
 
 export type Testimonial = {
   quote: string;
@@ -15,7 +17,17 @@ type Props = {
   heading?: string;
   testimonials?: Testimonial[];
   autoplay?: boolean;
-  autoplayDelay?: number; // ms
+  autoplayDelay?: number;
+};
+
+const variants = {
+  hidden: { opacity: 0, filter: "blur(4px)" },
+  show: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { delay: i * 0.025, duration: 0.25, ease: easeInOut },
+  }),
 };
 
 export default function Testimonials({
@@ -51,6 +63,7 @@ export default function Testimonials({
 }: Props) {
   const [index, setIndex] = useState(0);
   const total = testimonials.length;
+  const ref = React.useRef(null);
 
   useEffect(() => {
     if (!autoplay || total <= 1) return;
@@ -84,25 +97,69 @@ export default function Testimonials({
   const t = testimonials[index];
 
   return (
-    <section className="py-20 px-8 w-full bg-white">
-      <div className="flex relative flex-col items-center gap-14">
+    <section className="py-8 lg:py-20 px-5 md:px-8 w-full bg-white">
+      <div className="flex relative flex-col items-center gap-10 md:gap-14">
         <div className="self-start">
-          <h2 className="text-3xl md:text-5xl font-medium text-[#12161a]">
-            {heading}
-          </h2>
+          <motion.h2
+            ref={ref}
+            initial="hidden"
+            whileInView="show"
+            variants={variants}
+            viewport={{ once: true }}
+            className="text-4xl lg:text-5xl font-heading font-semibold text-[#12161a]"
+          >
+            {heading.split("").map((word, i) => (
+              <motion.span key={`${word}-${i}`} variants={variants} custom={i}>
+                {word}
+              </motion.span>
+            ))}
+          </motion.h2>
         </div>
 
-        <div className="relative flex flex-row items-center gap-8 w-full h-[400px]">
+        <div className="relative flex flex-col lg:flex-row items-center gap-12 md:gap-10 lg:gap-8 w-full lg:h-[400px]">
           {/* Single card view */}
-          <div className="flex-[1_0_0] w-px h-full relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 12,
+              delay: 0,
+            }}
+            viewport={{ once: true, amount: 0.6 }}
+            className="flex-[1_0_0] w-full lg:w-px h-[400px] relative"
+          >
             <article className="flex flex-col justify-center items-center gap-0 w-full h-min px-14 pt-10 pb-14 relative overflow-hidden bg-[#FAF7EF] opacity-100">
               <div className="border-b border-[rgba(59,59,59,0.12)] pb-6 mb-6">
-                <p className="text-gray-800 text-lg md:text-xl leading-relaxed font-medium">
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 12,
+                    delay: 0.25,
+                  }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  className="text-gray-800 text-lg font-heading leading-relaxed font-medium"
+                >
                   “{t.quote}”
-                </p>
+                </motion.p>
               </div>
 
-              <div className="flex flex-row items-center justify-between w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 12,
+                  delay: 0.5,
+                }}
+                viewport={{ once: true, amount: 0.6 }}
+                className="flex flex-row items-center justify-between w-full"
+              >
                 <div className="flex items-start gap-4">
                   <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 shrink-0">
                     {t.imageSrc ? (
@@ -121,10 +178,12 @@ export default function Testimonials({
                   </div>
 
                   <div>
-                    <p className="text-base font-medium text-gray-900">
+                    <p className="text-lg font-semibold font-heading text-gray-900">
                       {t.name}
                     </p>
-                    {t.id && <p className="text-sm text-gray-600">{t.id}</p>}
+                    {t.id && (
+                      <p className="text-sm font-body text-gray-600">{t.id}</p>
+                    )}
                   </div>
                 </div>
                 {/* Prev / Next buttons */}
@@ -177,7 +236,7 @@ export default function Testimonials({
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </article>
 
             {/* Dots / pagination */}
@@ -193,30 +252,54 @@ export default function Testimonials({
                 />
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* CTA */}
-          <div className="bg-[#efa027] flex flex-col flex-1 justify-start items-start content-center self-stretch gap-8 w-full max-w-[390px] h-auto p-5 relative overflow-visible">
+          <div className="bg-[#efa027] flex flex-col flex-1 justify-start items-start content-center self-stretch gap-8 w-full lg:max-w-[390px] h-auto p-5 relative overflow-visible">
             <div className="flex flex-col flex-1 justify-start content-center items-start gap-8 w-full p-[110px_40px] border-[1.5px] border-[#fff6] border-solid relative overflow-visible">
               <div className="flex flex-col flex-none justify-start content-center items-start gap-4 w-full h-min p-0 relative overflow-visible">
                 <div className="whitespace-pre-wrap wrap-break-word flex-none w-full max-w-[569px] h-auto relative">
-                  <h3 className="text-2xl font-medium text-white">
-                    Accepting applications for Fall 2025!
-                  </h3>
+                  <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 80,
+                      damping: 12,
+                      delay: 0.5,
+                    }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    className="text-[22px] font-heading font-semibold text-white"
+                  >
+                    Accepting applications for 2025-26!
+                  </motion.h3>
                 </div>
                 <div className="w-auto h-auto relative">
-                  <div className="cursor-pointer flex flex-row items-center gap-2.5 w-full h-min p-0 relative overflow-hidden">
-                    <a
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 80,
+                      damping: 12,
+                      delay: 0.75,
+                    }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    className="cursor-pointer flex flex-row items-center gap-2.5 w-full h-min p-0 relative overflow-hidden"
+                  >
+                    <Link
                       className="will-change-transform flex flex-row flex-none justify-center items-center gap-3.5 w-full h-min px-8 py-2.5 no-underline relative overflow-hidden bg-white"
                       href="./contact"
                     >
                       <div className="flex flex-row flex-none justify-center items-center gap-2.5 w-full h-min p-0 relative overflow-hidden">
                         <div className="outline-none flex flex-col justify-center shrink-0 relative">
-                          <p className="text-base font-medium">Apply Now</p>
+                          <p className="text-base font-heading font-medium">
+                            Apply Now
+                          </p>
                         </div>
                       </div>
-                    </a>
-                  </div>
+                    </Link>
+                  </motion.div>
                 </div>
               </div>
             </div>

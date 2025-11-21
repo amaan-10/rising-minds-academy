@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { easeInOut, motion } from "framer-motion";
 
 export type Academic = {
   name: string;
@@ -13,6 +14,16 @@ export type Academic = {
 type Props = {
   heading?: string;
   academics?: Academic[];
+};
+
+const variants = {
+  hidden: { opacity: 0, filter: "blur(4px)" },
+  show: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { delay: i * 0.025, duration: 0.25, ease: easeInOut },
+  }),
 };
 
 export default function Faculty({
@@ -33,44 +44,47 @@ export default function Faculty({
       role: "M.Sc., B.Ed.",
       imageSrc: "/profile-placeholder.png",
     },
-    // {
-    //   name: "Dr. Arlene McCoy",
-    //   role: "Research Associate Professor",
-    //   imageSrc: "/images/academic-4.jpg",
-    // },
-    // {
-    //   name: "Dr. Darrell Steward",
-    //   role: "Lead Research Analyst",
-    //   imageSrc: "/images/academic-5.jpg",
-    // },
-    // {
-    //   name: "Dr. Floyd Miles",
-    //   role: "Senior Scientist",
-    //   imageSrc: "/images/academic-6.jpg",
-    // },
-    // {
-    //   name: "Dr. Ralph Edwards",
-    //   role: "Research Project Coordinator",
-    //   imageSrc: "/images/academic-7.jpg",
-    // },
   ],
 }: Props) {
+  const ref = React.useRef(null);
   return (
-    <section className="py-20 px-8 bg-white">
-      <div className="flex relative flex-col items-center gap-14">
+    <section className="py-8 lg:py-20 px-5 md:px-8 bg-white">
+      <div className="flex relative flex-col items-center gap-10 md:gap-14">
         <div className="self-start">
-          <h2 className="text-3xl md:text-5xl font-medium text-[#12161a]">
-            {heading}
-          </h2>
+          <motion.h2
+            ref={ref}
+            initial="hidden"
+            whileInView="show"
+            variants={variants}
+            viewport={{ once: true }}
+            className="text-4xl lg:text-5xl font-heading font-semibold text-[#12161a]"
+          >
+            {heading.split("").map((word, i) => (
+              <motion.span key={`${word}-${i}`} variants={variants} custom={i}>
+                {word}
+              </motion.span>
+            ))}
+          </motion.h2>
         </div>
 
-        <div className="grid flex-none gap-6 grid-rows-[repeat(2,min-content)] grid-cols-[repeat(4,minmax(50px,1fr))] h-min justify-center overflow-visible p-0 relative w-full">
+        <div className="grid flex-none gap-6 grid-rows-[repeat(2,min-content)] grid-cols-[repeat(1,minmax(50px,1fr))] md:grid-cols-[repeat(2,minmax(50px,1fr))] lg:grid-cols-[repeat(4,minmax(50px,1fr))] h-min justify-center overflow-visible p-0 relative w-full">
           {academics.map((a, idx) => (
             <div
               key={`${a.name}-${idx}`}
               className="self-start h-auto w-full relative"
             >
-              <div className="flex flex-col justify-center items-center gap-2.5 h-min overflow-hidden p-0 relative w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 12,
+                  delay: 0.5,
+                }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="flex flex-col justify-center items-center gap-2.5 h-min overflow-hidden p-0 relative w-full"
+              >
                 <div className="flex flex-col flex-none justify-start items-start gap-3 h-min overflow-visible p-0 relative w-full">
                   <div className="flex justify-center items-center aspect-[0.847826/1] flex-none flex-row gap-0 h-[368px] overflow-hidden p-0 relative w-full">
                     <div className="flex-[1_0_0] h-full relative w-px">
@@ -93,13 +107,15 @@ export default function Faculty({
                   </div>
 
                   <div className="flex flex-col flex-none items-start gap-0 h-min overflow-visible p-0 relative w-full">
-                    <p className="text-xl font-medium text-[#12161a]">
+                    <p className="text-xl font-heading font-semibold text-[#12161a]">
                       {a.name}
                     </p>
-                    <p className="text-base text-[#3b3b3b]">{a.role}</p>
+                    <p className="text-base font-body text-[#3b3b3b]">
+                      {a.role}
+                    </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>

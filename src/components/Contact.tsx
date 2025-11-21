@@ -1,7 +1,9 @@
-"use client"
+"use client";
 import React from "react";
 import MapSection from "./MapSection";
 import { useState } from "react";
+import { easeInOut, motion } from "framer-motion";
+import { useRef } from "react";
 
 type Requirement = {
   id: string;
@@ -47,51 +49,114 @@ const REQUIREMENTS: Requirement[] = [
   },
 ];
 
+const variants = {
+  hidden: { opacity: 0, filter: "blur(4px)" },
+  visible: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { delay: i * 0.025, duration: 0.25, ease: easeInOut },
+  }),
+};
+
 const Contact = () => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const Titleref = useRef(null);
+  const ref = useRef(null);
 
   return (
     <div>
       <section
         id="hero-section"
-        className="py-20 px-8 bg-[#faf7ef] h-[350px] w-full"
+        className="py-16 md:py-20 px-5 md:px-8 bg-[#faf7ef] h-full md:h-[400px] w-full"
       >
-        <div className="flex flex-row items-start justify-self-center relative max-w-[1320px] w-full h-full flex-1">
+        <div className="flex flex-col md:flex-row items-start relative w-full h-full gap-6 md:gap-0">
           {/* Left content */}
-          <div className="flex flex-col items-start gap-6 w-full">
-            <h1 className="text-5xl md:text-7xl font-medium leading-tight tracking-tight text-gray-900">
-              {/* Keeping letters in normal flow — if you want per-letter animation, we can split into spans */}
-              Get In Touch
-            </h1>
+          <div className="flex flex-col items-center md:items-start gap-6 w-full">
+            <motion.h2
+              ref={Titleref}
+              initial="hidden"
+              animate="visible"
+              variants={variants}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold leading-tight tracking-tight text-[#12161a]"
+            >
+              {"Get In Touch".split("").map((word, i) => (
+                <motion.span
+                  key={`${word}-${i}`}
+                  variants={variants}
+                  custom={i}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h2>
           </div>
 
-          <div className="w-1 h-[350px] -my-20 bg-[#3b3b3b1f] mx-6"></div>
+          <div className="w-1 h-[400px] -my-20 bg-[#3b3b3b1f] mx-6 hidden md:block"></div>
 
           {/* Right content */}
-          <div className="flex flex-row items-end w-full h-full pl-24">
-            <p className="flex flex-col max-w-md text-lg md:text-xl text-gray-600">
+          <div className="flex flex-row items-center md:items-end justify-center md:justify-start w-full h-full pl-0 md:pl-12 lg:pl-24">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 12,
+                delay: 0.5,
+              }}
+              viewport={{ once: true, amount: 0.6 }}
+              className="flex flex-col w-full md:max-w-md text-lg md:text-xl font-body text-gray-600 text-center md:text-left"
+            >
               Have questions about our tuition programs for Grades 1 to 10?
               We&apos;re here to guide you and help you choose the right
               learning path for your child.
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>
       <section className="flex flex-col flex-none justify-center items-center gap-0 h-min overflow-hidden py-20 px-[30px] pb-[70px] relative w-full">
         <div className="flex flex-col flex-none justify-center items-center gap-14 h-min max-w-[1320px] overflow-hidden p-0 relative w-full z-0">
-          <div className="flex flex-row flex-none justify-start items-start gap-16 h-min overflow-visible p-0 relative w-full">
+          <div className="flex flex-col lg:flex-row flex-none justify-start items-start gap-10 lg:gap-16 h-min overflow-visible p-0 relative w-full">
             <div className="flex flex-col flex-[1_0_0px] self-stretch overflow-visible p-0 relative">
-              <div className="outline-none flex flex-col gap-5 justify-start shrink-0 flex-[1_0_0px] h-auto max-w-[569px] relative whitespace-pre-wrap wrap-break-word">
-                <h2 className=" text-[#12161a] text-5xl font-medium">
-                  Send us a Message
-                </h2>
-                <p className="text-base text-[#3b3b3b]">
+              <div className="outline-none flex flex-col gap-5 items-center md:items-start justify-start shrink-0 flex-[1_0_0px] h-auto max-w-[569px] relative whitespace-pre-wrap wrap-break-word">
+                <motion.h2
+                  ref={ref}
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={variants}
+                  viewport={{ once: true, amount: 0.6 }}
+                  className="text-[#12161a] text-3xl md:text-4xl lg:text-5xl font-heading font-semibold"
+                >
+                  {"Send us a Message".split("").map((word, i) => (
+                    <motion.span
+                      key={`${word}-${i}`}
+                      variants={variants}
+                      custom={i}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 80,
+                    damping: 12,
+                    delay: 0.5,
+                  }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  className="text-base font-body text-[#3b3b3b] text-center md:text-left"
+                >
                   Fill out the form and we&apos;ll get back to you within 24hrs
-                </p>
+                </motion.p>
               </div>
-              <div className="flex flex-row flex-none items-start justify-between h-min overflow-clip mb-7 relative w-full">
+              <div className="hidden lg:flex flex-row flex-none items-start justify-between h-min overflow-clip mb-7 relative w-full">
                 <div className="flex flex-col justify-start items-start flex-1 gap-2.5 h-min overflow-clip p-0 relative w-px">
                   <div className="flex flex-row justify-start items-start flex-none gap-2.5 h-min overflow-clip p-0 relative w-full">
                     <div className="relative flex self-center justify-center h-full">
@@ -104,13 +169,41 @@ const Contact = () => {
                       </svg>
                     </div>
                     <div className="flex-none h-auto relative whitespace-pre w-auto">
-                      <h5 className="text-xl font-medium text-black">
-                        Call Us
-                      </h5>
+                      <motion.h5
+                        ref={ref}
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={variants}
+                        viewport={{ once: true }}
+                        className="text-xl font-semibold font-heading text-black"
+                      >
+                        {"Call Us".split("").map((word, i) => (
+                          <motion.span
+                            key={`${word}-${i}`}
+                            variants={variants}
+                            custom={i}
+                          >
+                            {word}
+                          </motion.span>
+                        ))}
+                      </motion.h5>
                     </div>
                   </div>
                   <div className="flex-none h-auto relative whitespace-pre-wrap w-full wrap-break-word">
-                    <p className="text-base text-[#787878]">+91 9876543210</p>
+                    <motion.p
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 80,
+                        damping: 12,
+                        delay: 0.5,
+                      }}
+                      viewport={{ once: true, amount: 0.1 }}
+                      className="text-base font-body text-[#787878]"
+                    >
+                      +91 9876543210
+                    </motion.p>
                   </div>
                 </div>
                 <div className="flex flex-col justify-start items-start flex-1 gap-2.5 h-min overflow-clip p-0 relative w-px">
@@ -125,27 +218,57 @@ const Contact = () => {
                       </svg>
                     </div>
                     <div className="flex-none h-auto relative whitespace-pre w-auto">
-                      <h5 className="text-xl font-medium text-black">Email</h5>
+                      <motion.h5
+                        ref={ref}
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={variants}
+                        viewport={{ once: true }}
+                        className="text-xl font-semibold font-heading text-black"
+                      >
+                        {"Email".split("").map((word, i) => (
+                          <motion.span
+                            key={`${word}-${i}`}
+                            variants={variants}
+                            custom={i}
+                          >
+                            {word}
+                          </motion.span>
+                        ))}
+                      </motion.h5>
                     </div>
                   </div>
                   <div className="flex-none h-auto relative whitespace-pre-wrap w-full wrap-break-word">
-                    <p className="text-base text-[#787878]">
+                    <motion.p
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 80,
+                        damping: 12,
+                        delay: 0.5,
+                      }}
+                      viewport={{ once: true, amount: 0.1 }}
+                      className="text-base font-body text-[#787878]"
+                    >
                       contact@risingmindsacademy.com
-                    </p>
+                    </motion.p>
                   </div>
                 </div>
               </div>
             </div>
-            <form className="flex flex-col flex-[1_0_0px] justify-start items-start gap-5 h-min max-w-[580px] overflow-visible p-0 relative w-px">
+            <form className="flex flex-col flex-[1_0_0px] justify-start items-start gap-5 h-min w-full max-w-[580px] overflow-visible p-0 relative">
               <label className="flex flex-col justify-start items-start gap-2.5 h-min p-0 relative w-full flex-none">
                 <div className="outline-none flex flex-col justify-start flex-none h-auto relative whitespace-pre w-auto">
-                  <p className="text-[#12161a] text-base">Your Name *</p>
+                  <p className="text-[#12161a] font-heading text-base">
+                    Your Name <span className="text-[#ff0000]">*</span>
+                  </p>
                 </div>
-                <div className="relative w-full h-auto border border-[#3b3b3b1f] rounded-lg">
+                <div className="relative w-full h-auto border border-[#3b3b3b1f] font-body rounded-lg">
                   <input
                     type="text"
                     name="Your Name"
-                    placeholder="Your first name"
+                    placeholder="Your Name"
                     className="p-[12px_18px_12px_18px] w-full"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -155,25 +278,29 @@ const Contact = () => {
               </label>
               <label className="flex flex-col justify-start items-start flex-none gap-2 h-min p-0 relative w-full">
                 <div className="outline-none flex flex-col justify-start flex-none h-auto relative whitespace-pre w-auto">
-                  <p className="text-[#12161a] text-base">Email Address *</p>
+                  <p className="text-[#12161a] font-heading text-base">
+                    Phone No. <span className="text-[#ff0000]">*</span>
+                  </p>
                 </div>
-                <div className="relative w-full h-auto border border-[#3b3b3b1f] rounded-lg">
+                <div className="relative w-full h-auto border border-[#3b3b3b1f] font-body rounded-lg">
                   <input
-                    type="email"
+                    type="phone"
                     required
-                    name="Email"
-                    placeholder="email@mail.com"
+                    name="Phone No."
+                    placeholder="Your Phone No."
                     className="p-[12px_18px_12px_18px] w-full"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </label>
               <label className="flex flex-col justify-start items-start flex-none gap-2.5 h-min p-0 relative w-full">
                 <div className="outline-none flex flex-col justify-start flex-none h-auto relative whitespace-pre w-auto">
-                  <p className="text-[#12161a] text-base">Select Class</p>
+                  <p className="text-[#12161a] font-heading text-base">
+                    Select Class
+                  </p>
                 </div>
-                <div className="relative w-full h-auto border border-[#3b3b3b1f] rounded-lg">
+                <div className="relative w-full h-auto border border-[#3b3b3b1f] font-body rounded-lg">
                   <select
                     name="Select Class"
                     className="p-[12px_18px_12px_18px] w-full"
@@ -191,9 +318,11 @@ const Contact = () => {
               </label>
               <label className="flex flex-col justify-start items-start flex-none gap-2.5 h-min p-0 relative w-full">
                 <div className="outline-none flex flex-col justify-start flex-none h-auto relative whitespace-pre w-auto">
-                  <p className="text-[#12161a] text-base">Message *</p>
+                  <p className="text-[#12161a] font-heading text-base">
+                    Message <span className="text-[#ff0000]">*</span>
+                  </p>
                 </div>
-                <div className="relative w-full h-auto border border-[#3b3b3b1f] rounded-lg">
+                <div className="relative w-full h-auto border border-[#3b3b3b1f] font-body rounded-lg">
                   <textarea
                     required
                     name="Message"
@@ -210,13 +339,113 @@ const Contact = () => {
                   className="flex items-center justify-center cursor-pointer flex-row gap-0 h-min overflow-visible px-8 py-3.5 relative w-min bg-[#efa027] rounded opacity-100"
                 >
                   <div className="outline-none flex flex-col justify-start flex-none h-auto relative select-none whitespace-pre w-auto">
-                    <p className="text-white text-base font-medium">
+                    <p className="text-white text-base font-heading font-medium">
                       Send Message
                     </p>
                   </div>
                 </button>
               </div>
             </form>
+            <div className="flex lg:hidden flex-row flex-none items-start justify-between h-min overflow-clip mb-7 relative w-full">
+              <div className="flex flex-col justify-start items-start flex-1 gap-2.5 h-min overflow-clip p-0 relative w-px">
+                <div className="flex flex-row justify-start items-start flex-none gap-2.5 h-min overflow-clip p-0 relative w-full">
+                  <div className="relative flex self-center justify-center h-full">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      className="h-5 w-5"
+                    >
+                      <path d="M160.2 25C152.3 6.1 131.7-3.9 112.1 1.4l-5.5 1.5c-64.6 17.6-119.8 80.2-103.7 156.4 37.1 175 174.8 312.7 349.8 349.8 76.3 16.2 138.8-39.1 156.4-103.7l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2C233.9 335.4 177.3 277 144.8 205.3L189 169.3c13.9-11.3 18.6-30.4 11.8-47L160.2 25z" />
+                    </svg>
+                  </div>
+                  <div className="flex-none h-auto relative whitespace-pre w-auto">
+                    <motion.h5
+                      ref={ref}
+                      initial="hidden"
+                      whileInView="visible"
+                      variants={variants}
+                      viewport={{ once: true }}
+                      className="text-xl font-semibold font-heading text-black"
+                    >
+                      {"Call Us".split("").map((word, i) => (
+                        <motion.span
+                          key={`${word}-${i}`}
+                          variants={variants}
+                          custom={i}
+                        >
+                          {word}
+                        </motion.span>
+                      ))}
+                    </motion.h5>
+                  </div>
+                </div>
+                <div className="flex-none h-auto relative whitespace-pre-wrap w-full wrap-break-word">
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 80,
+                      damping: 12,
+                      delay: 0.5,
+                    }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    className="text-base font-body text-[#787878]"
+                  >
+                    +91 9876543210
+                  </motion.p>
+                </div>
+              </div>
+              <div className="flex flex-col justify-start items-start flex-1 gap-2.5 h-min overflow-clip p-0 relative w-px">
+                <div className="flex flex-row justify-start items-start flex-none gap-2.5 h-min overflow-clip p-0 relative w-full">
+                  <div className="relative flex self-center justify-center h-full">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                      className="h-5 w-5"
+                    >
+                      <path d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z" />
+                    </svg>
+                  </div>
+                  <div className="flex-none h-auto relative whitespace-pre w-auto">
+                    <motion.h5
+                      ref={ref}
+                      initial="hidden"
+                      whileInView="visible"
+                      variants={variants}
+                      viewport={{ once: true }}
+                      className="text-xl font-semibold font-heading text-black"
+                    >
+                      {"Email".split("").map((word, i) => (
+                        <motion.span
+                          key={`${word}-${i}`}
+                          variants={variants}
+                          custom={i}
+                        >
+                          {word}
+                        </motion.span>
+                      ))}
+                    </motion.h5>
+                  </div>
+                </div>
+                <div className="flex-none h-auto relative whitespace-pre-wrap w-full wrap-break-word">
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 80,
+                      damping: 12,
+                      delay: 0.5,
+                    }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    className="text-base font-body text-[#787878]"
+                  >
+                    contact@risingmindsacademy.com
+                  </motion.p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -224,40 +453,88 @@ const Contact = () => {
         <div className="flex flex-col flex-none justify-center items-center gap-8 h-min max-w-[1320px] overflow-hidden p-0 relative w-full z-0">
           <div className="flex flex-row flex-[1_0_0px] justify-start items-start gap-[60px] h-min overflow-visible p-0 relative">
             <div className="outline-none flex flex-col justify-center shrink-0 flex-[1_0_0px] h-auto max-w-[569px] relative whitespace-pre-wrap wrap-break-word">
-              <h2 className=" text-[#12161a] text-5xl font-medium">
-                Application Requirements
-              </h2>
+              <motion.h2
+                ref={ref}
+                initial="hidden"
+                whileInView="visible"
+                variants={variants}
+                viewport={{ once: true }}
+                className="text-[#12161a] text-3xl md:text-4xl font-heading font-semibold text-center md:text-left"
+              >
+                {"Application Requirements".split("").map((word, i) => (
+                  <motion.span
+                    key={`${word}-${i}`}
+                    variants={variants}
+                    custom={i}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </motion.h2>
             </div>
           </div>
 
-          <div className="prose prose-sm md:prose-base lg:prose-lg max-w-none text-gray-700">
-            <p>
+          <div className="prose prose-sm md:prose-base lg:prose-lg max-w-none ">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 12,
+                delay: 0.5,
+              }}
+              viewport={{ once: true, amount: 0.1 }}
+              className="text-base font-body text-[#787878] text-center lg:text-left"
+            >
               All students — whether new admissions or transferring from another
               school — are required to complete the following enrollment steps:
-            </p>
+            </motion.p>
           </div>
 
           {/* Requirements list: responsive 1/2 column layout */}
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+          <motion.ul
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 12,
+              delay: 0.5,
+            }}
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-y-4 gap-x-8"
+          >
             {REQUIREMENTS.map((req) => (
               <li key={req.id} className="flex items-start gap-4">
                 <span
                   aria-hidden
                   className="inline-flex self-center justify-self-center h-2 w-2 shrink-0 rounded-full bg-gray-900"
                 />
-                <p className="text-base md:text-lg text-gray-800 leading-relaxed">
+                <p className="text-base font-body text-gray-800 leading-relaxed">
                   {req.text}
                 </p>
               </li>
             ))}
-          </ul>
+          </motion.ul>
 
           {/* Optional CTA area if you want an Apply button */}
           <div className="mt-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <p className="text-base text-gray-600">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 12,
+                delay: 0.5,
+              }}
+              viewport={{ once: true, amount: 0.1 }}
+              className="text-base font-body text-gray-600 text-center lg:text-left"
+            >
               Need help with your application or have questions about required
               documents? Reach out to our admissions team.
-            </p>
+            </motion.p>
           </div>
         </div>
       </section>

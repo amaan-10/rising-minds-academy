@@ -37,15 +37,15 @@ export const AcademicCard = ({
       </div>
 
       <div className="p-6">
-        <h3 className="mb-2 text-xl font-semibold text-card-foreground">
+        <h3 className="mb-2 text-xl font-heading font-semibold text-card-foreground">
           {title}
         </h3>
-        <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
+        <p className="mb-4 text-sm font-body text-muted-foreground leading-relaxed">
           {shortDescription}
         </p>
 
         <div className="inline-flex items-center gap-3">
-          <span className="text-lg font-semibold text-black">Learn More</span>
+          <span className="text-lg font-heading font-medium text-black">Learn More</span>
 
           <span className="w-8 h-8 flex items-center justify-center relative bg-blue-600 rounded-full group-hover:bg-black transition-colors duration-300">
             <div

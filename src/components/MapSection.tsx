@@ -24,7 +24,7 @@ export default function MapSection({
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-8 flex flex-row flex-[1_0_0px] justify-start items-start gap-[60px] h-min overflow-visible p-0 relative">
           <div className="outline-none flex flex-col justify-center shrink-0 flex-[1_0_0px] h-auto max-w-[569px] relative whitespace-pre-wrap wrap-break-word">
-            <h2 className=" text-[#12161a] text-5xl font-medium">
+            <h2 className="text-[#12161a] text-3xl md:text-4xl lg:text-5xl font-heading font-semibold">
               Our Location
             </h2>
           </div>

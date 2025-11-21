@@ -85,7 +85,7 @@ const FAQ = () => {
             >
               <div className="pt-6 px-6 flex flex-col gap-5">
                 <div className="flex justify-between items-start">
-                  <h3 className="text-xl md:text-[22px] lg:text-2xl font-semibold text-[#111111] font-urbanist">
+                  <h3 className="text-xl md:text-[23px] font-heading font-semibold text-[#111111] font-urbanist">
                     {faq.question}
                   </h3>
                   <motion.svg
@@ -109,7 +109,7 @@ const FAQ = () => {
 
                 <div ref={parent}>
                   {openStates[index] && (
-                    <div className="text-[#616161] pb-6 text-base lg:text-lg font-normal">
+                    <div className="text-[#616161] pb-6 text-base font-body font-normal">
                       <p>{faq.answer.slice(0, 1)}</p>
                       {faq.answer.length > 1 && (
                         <>
