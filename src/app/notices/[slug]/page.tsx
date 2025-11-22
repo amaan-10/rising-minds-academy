@@ -2,31 +2,11 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import React from "react";
-import { getNoticesBySlug, getAllNoticesSlugs } from "@/lib/notices";
+import { getNoticesBySlug } from "@/lib/notices";
 import { NoticeItem } from "@/types/notices";
 import { notFound, useParams } from "next/navigation";
 import Link from "next/link";
 import { easeInOut, motion } from "framer-motion";
-
-export function GenerateStaticParams() {
-  const slugs = getAllNoticesSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
-export function GenerateMetadata() {
-  const params = useParams();
-  const { slug } = params;
-  const item = typeof slug === "string" ? getNoticesBySlug(slug) : null;
-  if (!item) return { title: "Notices Program" };
-  return {
-    title: item.title,
-    description: item.shortDescription,
-    openGraph: {
-      title: item.title,
-      description: item.shortDescription,
-    },
-  };
-}
 
 const variants = {
   hidden: { opacity: 0, filter: "blur(4px)" },

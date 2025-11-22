@@ -3,33 +3,12 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Image from "next/image";
 import React from "react";
-import { getAcademicBySlug, getAllAcademicSlugs } from "@/lib/academics";
+import { getAcademicBySlug } from "@/lib/academics";
 import { AcademicItem } from "@/types/academics";
 import { notFound, useParams } from "next/navigation";
 import Link from "next/link";
 import { Academic as AcademicData } from "@/lib/academics";
 import { AcademicCard } from "@/components/AcademicCard";
-
-export function GenerateStaticParams() {
-  const slugs = getAllAcademicSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
-export function GenerateMetadata() {
-  const params = useParams();
-  const { slug } = params;
-  const item = typeof slug === "string" ? getAcademicBySlug(slug) : null;
-  if (!item) return { title: "Academic Program" };
-  return {
-    title: item.title,
-    description: item.shortDescription,
-    openGraph: {
-      title: item.title,
-      description: item.shortDescription,
-      images: item.image ? [item.image] : undefined,
-    },
-  };
-}
 
 export default function AcademicDetailPage() {
   const params = useParams();
@@ -71,13 +50,19 @@ export default function AcademicDetailPage() {
             <div className="flex flex-col gap-8 md:gap-6">
               {/* Overview */}
               <div>
-                <h2 className="text-2xl font-heading font-semibold mb-4">Overview</h2>
-                <p className="text-gray-600 font-body leading-relaxed">{item.overview}</p>
+                <h2 className="text-2xl font-heading font-semibold mb-4">
+                  Overview
+                </h2>
+                <p className="text-gray-600 font-body leading-relaxed">
+                  {item.overview}
+                </p>
               </div>
               <div className="flex flex-col md:flex-row gap-8 md:gap-6 w-full justify-between pr-5">
                 {/* Subject Covered */}
                 <div>
-                  <h2 className="text-2xl font-heading font-bold mb-4">Subjects Covered</h2>
+                  <h2 className="text-2xl font-heading font-bold mb-4">
+                    Subjects Covered
+                  </h2>
                   <div className="space-y-4">
                     {Object.entries(item.subjects).map(
                       ([subject, topics], index) => (
@@ -110,7 +95,9 @@ export default function AcademicDetailPage() {
 
                   {/* Key Focus Area */}
                   <section>
-                    <h2 className="text-2xl font-bold font-heading mb-6">Key Focus Area</h2>
+                    <h2 className="text-2xl font-bold font-heading mb-6">
+                      Key Focus Area
+                    </h2>
                     <ul className="list-disc list-inside space-y-2 font-body text-gray-600 leading-relaxed">
                       {item.whatYouCanExpect.map((expectation, index) => (
                         <li key={index}>{expectation}</li>
