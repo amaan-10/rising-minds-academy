@@ -21,19 +21,19 @@ const FAQPage = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col justify-start items-start flex-none gap-5 h-min max-w-[1400px] overflow-visible px-[50px] pt-20 pb-[130px] relative">
+      <div className="flex flex-col justify-start items-start flex-none gap-5 h-min max-w-[1400px] overflow-visible py-16 md:py-20 px-5 md:px-8 relative">
         <div className="flex-none h-auto max-w-[850px] relative whitespace-pre-wrap w-full wrap-break-word">
-          <h6 className="text-sm font-semibold text-[#3b3b3b]">
+          <h6 className="text-sm font-body font-semibold text-[#3b3b3b]">
             Frequently Asked Questions
           </h6>
         </div>
-        <div className="flex-none h-auto max-w-[60%] relative whitespace-pre-wrap w-full wrap-break-word">
+        <div className="flex-none h-auto max-w-[75%] lg:max-w-[60%] relative whitespace-pre-wrap w-full wrap-break-word">
           <motion.h1
             ref={ref}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="text-5xl md:text-[68px] font-medium leading-tight tracking-tight text-[#12161a]"
+            className="text-4xl md:text-5xl lg:text-6xl font-heading font-medium leading-tight tracking-tight text-[#12161a]"
           >
             {"Smart Learning Begins With the Right Guidance"
               .split("")
@@ -59,7 +59,7 @@ const FAQPage = () => {
               delay: 1.2,
             }}
             viewport={{ once: true, amount: 0.1 }}
-            className="flex flex-col text-lg md:text-xl text-[#3b3b3b] w-full"
+            className="flex flex-col text-base md:text-lg lg:text-xl font-body text-[#3b3b3b] w-full"
           >
             We bring focused teaching, effective strategies, and personalized
             support to help Class 1-10 students build strong fundamentals and
@@ -67,8 +67,10 @@ const FAQPage = () => {
           </motion.p>
         </div>
       </div>
-      <section className="flex flex-row justify-center items-center flex-none gap-0 h-min overflow-clip pb-[130px] relative w-full">
-        <div className="flex flex-row justify-start items-start flex-1 gap-[110px] h-min max-w-[1400px] overflow-visible px-[50px] relative">
+
+      <section className="flex justify-center items-center w-full pb-20 md:pb-[100px] lg:pb-[130px] relative">
+        <div className="flex flex-col lg:flex-row justify-start items-start w-full max-w-[1400px] gap-8 md:gap-20 lg:gap-[110px] px-4 md:px-8">
+          {/* Image block */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -79,21 +81,24 @@ const FAQPage = () => {
               delay: 0.2,
             }}
             viewport={{ once: true, amount: 0.1 }}
-            className="flex-1 h-[503px] max-w-[530px] overflow-clip relative w-full"
+            className="w-full lg:flex-1 lg:max-w-[530px] h-[360px] md:h-[503px] overflow-hidden relative"
           >
             <div className="absolute inset-0">
               <Image
                 decoding="auto"
-                width="1333"
-                height="2000"
-                sizes="min(max((min(max(100vw, 1px), 1400px) - 210px) / 2, 1px), 530px)"
+                width={1333}
+                height={2000}
+                sizes="(min-width: 768px) 50vw, 100vw"
                 src="/faq.jpg"
-                alt="Conference"
-                className="block w-full h-full rounded-inherit object-cover object-[0%_30%]"
+                alt="Conference — people at a discussion table"
+                className="block w-full h-full object-cover object-[0%_30%]"
+                loading="lazy"
               />
             </div>
           </motion.div>
-          <div className="relative h-auto w-1/2">
+
+          {/* FAQ block */}
+          <div className="w-full lg:w-1/2 relative">
             <FAQ />
           </div>
         </div>

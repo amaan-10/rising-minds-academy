@@ -34,7 +34,6 @@ export function GenerateMetadata() {
 export default function AcademicDetailPage() {
   const params = useParams();
   const { slug } = params;
-  console.log(slug);
   const item: AcademicItem | null =
     typeof slug === "string" ? getAcademicBySlug(slug) : null;
 
@@ -47,11 +46,11 @@ export default function AcademicDetailPage() {
         {/* Hero Section */}
         <section className="px-4 py-12 md:py-20 max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-balance">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold mb-4 text-balance">
               {item.title}
             </h1>
 
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg font-body leading-relaxed">
               {item.shortDescription}
             </p>
           </div>
@@ -68,25 +67,25 @@ export default function AcademicDetailPage() {
           </div>
 
           {/* Three Column Section */}
-          <div className="flex flex-col md:flex-row gap-10">
+          <div className="flex flex-col lg:flex-row gap-10">
             <div className="flex flex-col gap-8 md:gap-6">
               {/* Overview */}
               <div>
-                <h2 className="text-2xl font-bold mb-4">Overview</h2>
-                <p className="text-gray-600 leading-relaxed">{item.overview}</p>
+                <h2 className="text-2xl font-heading font-semibold mb-4">Overview</h2>
+                <p className="text-gray-600 font-body leading-relaxed">{item.overview}</p>
               </div>
               <div className="flex flex-col md:flex-row gap-8 md:gap-6 w-full justify-between pr-5">
                 {/* Subject Covered */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">Subjects Covered</h2>
+                  <h2 className="text-2xl font-heading font-bold mb-4">Subjects Covered</h2>
                   <div className="space-y-4">
                     {Object.entries(item.subjects).map(
                       ([subject, topics], index) => (
                         <div key={index}>
-                          <h3 className="text-xl font-semibold mb-2 capitalize">
+                          <h3 className="text-xl font-heading font-semibold mb-2 capitalize">
                             {subject}
                           </h3>
-                          <ul className="list-disc list-inside space-y-1 text-gray-600 leading-relaxed">
+                          <ul className="list-disc list-inside space-y-1 text-gray-600 font-body leading-relaxed">
                             {topics.map((topic, idx) => (
                               <li key={idx}>{topic}</li>
                             ))}
@@ -99,10 +98,10 @@ export default function AcademicDetailPage() {
                 <div className="flex flex-col gap-8 md:gap-6">
                   {/* What You Can Expect */}
                   <div>
-                    <h2 className="text-2xl font-bold mb-4">
+                    <h2 className="text-2xl font-heading font-bold mb-4">
                       What You Can Expect
                     </h2>
-                    <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed">
+                    <ul className="list-disc list-inside font-body space-y-2 text-gray-600 leading-relaxed">
                       {item.whatYouCanExpect.map((expectation, index) => (
                         <li key={index}>{expectation}</li>
                       ))}
@@ -111,8 +110,8 @@ export default function AcademicDetailPage() {
 
                   {/* Key Focus Area */}
                   <section>
-                    <h2 className="text-2xl font-bold mb-6">Key Focus Area</h2>
-                    <ul className="list-disc list-inside space-y-2 text-gray-600 leading-relaxed">
+                    <h2 className="text-2xl font-bold font-heading mb-6">Key Focus Area</h2>
+                    <ul className="list-disc list-inside space-y-2 font-body text-gray-600 leading-relaxed">
                       {item.whatYouCanExpect.map((expectation, index) => (
                         <li key={index}>{expectation}</li>
                       ))}
@@ -124,14 +123,14 @@ export default function AcademicDetailPage() {
 
             {/* Get Started Today */}
             <div className="flex flex-col min-w-xs bg-white rounded-2xl shadow-lg p-6 h-min sticky top-20 border border-gray-200">
-              <h2 className="text-2xl font-semibold mb-4">
+              <h2 className="text-[22px] font-heading font-semibold mb-4">
                 Enroll Your Child Today
               </h2>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+              <p className="text-gray-600 text-sm font-body leading-relaxed mb-4">
                 Secure their spot and help them build strong fundamentals from
                 Class 1 to 10.
               </p>
-              <ul className="list-disc text-sm list-inside mb-4 space-y-2 ">
+              <ul className="list-disc text-sm font-body list-inside mb-4 space-y-2 ">
                 <li>Average reply time: 1 hour</li>
                 <li>Consistent improvement results</li>
                 <li>Dedicated and friendly teachers</li>
@@ -143,7 +142,7 @@ export default function AcademicDetailPage() {
                 >
                   <div className="flex flex-col flex-[1_0_0] items-center gap-[5px] w-px pl-[5px] relative overflow-hidden">
                     <div className="whitespace-pre flex-none w-auto h-auto relative opacity-100 transform-none">
-                      <p className="text-base font-medium text-white">
+                      <p className="text-base font-medium font-heading text-white">
                         Admission Open
                       </p>
                     </div>
