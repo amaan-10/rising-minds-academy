@@ -24,31 +24,35 @@ export default function PrivacyPolicyPage() {
       <Header />
       <section
         id="hero-section"
-        className="py-20 px-8 bg-[#faf7ef] h-[400px] w-full"
+        className="py-16 md:py-20 px-5 md:px-8 bg-[#faf7ef] h-full md:h-[400px] w-full"
       >
-        <div className="flex flex-row items-start relative w-full h-full flex-1">
+        <div className="flex flex-col md:flex-row items-start relative w-full h-full gap-6 md:gap-0">
           {/* Left content */}
-          <div className="flex flex-col items-start gap-6 w-full">
-            <motion.h1
+          <div className="flex flex-col items-center md:items-start gap-6 w-full">
+            <motion.h2
               ref={ref}
               initial="hidden"
               animate="visible"
               variants={variants}
               viewport={{ once: true }}
-              className="text-5xl md:text-7xl font-heading font-semibold leading-tight tracking-tight text-gray-900"
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold leading-tight tracking-tight text-[#12161a]"
             >
-              {"Privacy Policy".split("").map((ch, i) => (
-                <motion.span key={`${ch}-${i}`} custom={i} variants={variants}>
-                  {ch}
+              {"Privacy Policy".split("").map((word, i) => (
+                <motion.span
+                  key={`${word}-${i}`}
+                  variants={variants}
+                  custom={i}
+                >
+                  {word}
                 </motion.span>
               ))}
-            </motion.h1>
+            </motion.h2>
           </div>
 
-          <div className="w-1 h-[400px] -my-20 bg-[#3b3b3b1f] mx-6"></div>
+          <div className="w-1 h-[400px] -my-20 bg-[#3b3b3b1f] mx-6 hidden md:block"></div>
 
           {/* Right content */}
-          <div className="flex flex-row items-end w-full h-full pl-24">
+          <div className="flex flex-row items-center md:items-end justify-center md:justify-start w-full h-full pl-0 md:pl-12 lg:pl-24">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,14 +63,14 @@ export default function PrivacyPolicyPage() {
                 delay: 0.5,
               }}
               viewport={{ once: true, amount: 0.6 }}
-              className="flex flex-col max-w-md text-lg md:text-xl font-body text-gray-600"
+              className="flex flex-col w-full md:max-w-md text-lg md:text-xl font-body text-gray-600 text-center md:text-left"
             >
               Last Updated: 18 Nov, 2025
             </motion.p>
           </div>
         </div>
       </section>
-      <section className="flex flex-col items-center gap-24 w-full h-min p-[76px_30px_100px] relative overflow-hidden">
+      <section className="flex flex-col items-center gap-24 w-full h-min p-[50px_20px] md:p-[70px_30px_80px] lg:p-[76px_30px_100px] relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
