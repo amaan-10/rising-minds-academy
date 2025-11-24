@@ -2,16 +2,29 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { getAcademicBySlug } from "@/lib/academics";
 import { AcademicItem } from "@/types/academics";
 import { notFound, useParams } from "next/navigation";
 import Link from "next/link";
 import { Academic as AcademicData } from "@/lib/academics";
 import { AcademicCard } from "@/components/AcademicCard";
+import { easeInOut, motion } from "framer-motion";
+
+const variants = {
+  hidden: { opacity: 0, filter: "blur(4px)" },
+  visible: (i: number) => ({
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { delay: i * 0.025, duration: 0.25, ease: easeInOut },
+  }),
+};
 
 export default function AcademicDetailPage() {
   const params = useParams();
+  const ref = useRef(null);
+
   const { slug } = params;
   const item: AcademicItem | null =
     typeof slug === "string" ? getAcademicBySlug(slug) : null;
@@ -25,17 +38,53 @@ export default function AcademicDetailPage() {
         {/* Hero Section */}
         <section className="px-4 py-12 md:py-20 max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold mb-4 text-balance">
-              {item.title}
-            </h1>
+            <motion.h1
+              ref={ref}
+              initial="hidden"
+              animate="visible"
+              variants={variants}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl lg:text-6xl font-heading font-semibold mb-4 text-balance"
+            >
+              {item.title.split("").map((word, i) => (
+                <motion.span
+                  key={`${word}-${i}`}
+                  variants={variants}
+                  custom={i}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.h1>
 
-            <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg font-body leading-relaxed">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 12,
+                delay: 0.5,
+              }}
+              viewport={{ once: true, amount: 0.6 }}
+              className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg font-body leading-relaxed"
+            >
               {item.shortDescription}
-            </p>
+            </motion.p>
           </div>
 
-          {/* Hero Image */}
-          <div className="rounded-2xl flex items-center justify-center overflow-hidden shadow-lg mb-12 bg-[#f5f5f5] ">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 12,
+              delay: 0.75,
+            }}
+            viewport={{ once: true, amount: 0.6 }}
+            className="rounded-2xl flex items-center justify-center overflow-hidden shadow-lg mb-12 bg-[#f5f5f5] "
+          >
             <Image
               width={505}
               height={505}
@@ -43,10 +92,20 @@ export default function AcademicDetailPage() {
               alt="Team collaboration"
               className="aspect-16/11 bg-[#f5f5f5] object-cover"
             />
-          </div>
+          </motion.div>
 
-          {/* Three Column Section */}
-          <div className="flex flex-col lg:flex-row gap-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 12,
+              delay: 1,
+            }}
+            viewport={{ once: true, amount: 0.1 }}
+            className="flex flex-col lg:flex-row gap-10"
+          >
             <div className="flex flex-col gap-8 md:gap-6">
               {/* Overview */}
               <div>
@@ -181,7 +240,7 @@ export default function AcademicDetailPage() {
                 </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
 
         <section className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 pt-[120px] px-[30px] pb-[60px]">
