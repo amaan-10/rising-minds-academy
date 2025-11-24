@@ -128,9 +128,9 @@ export default function Testimonials({
               delay: 0,
             }}
             viewport={{ once: true, amount: 0.6 }}
-            className="flex-[1_0_0] w-full lg:w-px h-[400px] relative"
+            className="flex-[1_0_0] w-full lg:w-px lg:h-[400px] relative"
           >
-            <article className="flex flex-col justify-center items-center gap-0 w-full h-min px-14 pt-10 pb-14 relative overflow-hidden bg-[#FAF7EF] opacity-100">
+            <article className="flex flex-col justify-center items-center gap-0 w-full h-min p-5 md:p-10 lg:px-14 lg:pt-10 lg:pb-14 relative overflow-hidden bg-[#FAF7EF] opacity-100">
               <div className="border-b border-[rgba(59,59,59,0.12)] pb-6 mb-6">
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
